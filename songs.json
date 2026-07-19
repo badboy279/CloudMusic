@@ -4,17 +4,17 @@
     "name": "晴天",
     "artist": "周杰伦",
     "album": "叶惠美",
-    "cover": "cover/qingtian.jpg",
-    "music": "music/qingtian.mp3",
-    "lyric": "lyrics/qingtian.lrc"
+    "cover": "https://raw.githubusercontent.com/badboy279/CloudMusic/main/cover/qingtian.jpg",
+    "music": "https://raw.githubusercontent.com/badboy279/CloudMusic/main/music/qingtian.mp3",
+    "lyric": "https://raw.githubusercontent.com/badboy279/CloudMusic/main/lyrics/qingtian.lrc"
   },
   {
     "id": 2,
     "name": "江南",
     "artist": "林俊杰",
     "album": "第二天堂",
-    "cover": "cover/jiangnan.jpg",
-    "music": "music/jiangnan.mp3",
-    "lyric": "lyrics/jiangnan.lrc"
+    "cover": "https://raw.githubusercontent.com/badboy279/CloudMusic/main/cover/jiangnan.jpg",
+    "music": "https://raw.githubusercontent.com/badboy279/CloudMusic/main/music/jiangnan.mp3",
+    "lyric": "https://raw.githubusercontent.com/badboy279/CloudMusic/main/lyrics/jiangnan.lrc"
   }
 ]
