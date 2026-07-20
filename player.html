@@ -10,27 +10,29 @@
 
   <title>Cloud Music Player</title>
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: transparent;
-      overflow: hidden;
-    }
+<style>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+  }
 
-    audio {
-      width: 100%;
-    }
-  </style>
+  audio {
+    display: none;
+  }
+</style>
 </head>
 
 <body>
 
-  <audio
-    id="player"
-    controls
-    preload="metadata"
-  ></audio>
+<audio
+  id="player"
+  preload="metadata"
+></audio>
 
   <script>
     const player = document.getElementById("player");
