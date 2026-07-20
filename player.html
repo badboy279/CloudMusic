@@ -13,8 +13,9 @@
   <style>
     body {
       margin: 0;
-      padding: 8px;
-      background: white;
+      padding: 0;
+      background: transparent;
+      overflow: hidden;
     }
 
     audio {
@@ -32,18 +33,101 @@
   ></audio>
 
   <script>
+    const player = document.getElementById("player");
+
     const params = new URLSearchParams(
       window.location.search
     );
 
     const musicUrl = params.get("url");
 
-    const player = document.getElementById("player");
-
     if (musicUrl) {
       player.src = musicUrl;
       player.load();
     }
+
+    let lastCommand = "";
+
+    function readCommand() {
+      if (
+        !window.AppInventor ||
+        !window.AppInventor.getWebViewString
+      ) {
+        return;
+      }
+
+      const command =
+        window.AppInventor.getWebViewString() || "";
+
+      if (!command || command === lastCommand) {
+        return;
+      }
+
+      lastCommand = command;
+
+      if (command.startsWith("PLAY")) {
+        player.play();
+      }
+
+      if (command.startsWith("PAUSE")) {
+        player.pause();
+      }
+
+      if (command.startsWith("STOP")) {
+        player.pause();
+        player.currentTime = 0;
+      }
+
+      if (command.startsWith("SEEK|")) {
+        const value = Number(
+          command.split("|")[1]
+        );
+
+        if (!isNaN(value)) {
+          player.currentTime = value;
+        }
+      }
+    }
+
+    setInterval(readCommand, 200);
+
+    function sendStatus() {
+      if (
+        !window.AppInventor ||
+        !window.AppInventor.setWebViewString
+      ) {
+        return;
+      }
+
+      const status = [
+        "STATUS",
+        Math.floor(player.currentTime || 0),
+        Math.floor(player.duration || 0),
+        player.paused ? "PAUSED" : "PLAYING"
+      ].join("|");
+
+      window.AppInventor.setWebViewString(status);
+    }
+
+    player.addEventListener(
+      "timeupdate",
+      sendStatus
+    );
+
+    player.addEventListener(
+      "loadedmetadata",
+      sendStatus
+    );
+
+    player.addEventListener(
+      "play",
+      sendStatus
+    );
+
+    player.addEventListener(
+      "pause",
+      sendStatus
+    );
   </script>
 
 </body>
