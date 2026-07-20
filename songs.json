@@ -10,11 +10,11 @@
   },
   {
     "id": 2,
-    "name": "江南",
-    "artist": "林俊杰",
-    "album": "第二天堂",
-    "cover": "cover/jiangnan.jpg",
-    "music": "music/jiangnan.mp3",
-    "lyric": "lyrics/jiangnan.lrc"
+    "name": "春风吹",
+    "artist": "方大同",
+    "album": "",
+    "cover": "cover/chunfengchui.jpg",
+    "music": "https://cdn.jsdelivr.net/gh/badboy279/CloudMusic@main/music/chunfengchui.mp3",
+    "lyric": "lyrics/chunfengchui.lrc"
   }
 ]
