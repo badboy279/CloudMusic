@@ -10,29 +10,35 @@
 
   <title>Cloud Music Player</title>
 
-<style>
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    overflow: hidden;
-  }
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      background: transparent;
+    }
 
-  audio {
-    display: none;
-  }
-</style>
+    #player {
+      position: fixed;
+      left: -9999px;
+      top: -9999px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+  </style>
 </head>
 
 <body>
 
-<audio
-  id="player"
-  preload="metadata"
-></audio>
+  <audio
+    id="player"
+    preload="metadata"
+    playsinline
+  ></audio>
 
   <script>
     const player = document.getElementById("player");
@@ -68,7 +74,9 @@
       lastCommand = command;
 
       if (command.startsWith("PLAY")) {
-        player.play();
+        player.play().catch(function(error) {
+          console.log(error);
+        });
       }
 
       if (command.startsWith("PAUSE")) {
@@ -81,12 +89,11 @@
       }
 
       if (command.startsWith("SEEK|")) {
-        const value = Number(
-          command.split("|")[1]
-        );
+        const parts = command.split("|");
+        const seconds = Number(parts[1]);
 
-        if (!isNaN(value)) {
-          player.currentTime = value;
+        if (!isNaN(seconds)) {
+          player.currentTime = seconds;
         }
       }
     }
@@ -111,25 +118,10 @@
       window.AppInventor.setWebViewString(status);
     }
 
-    player.addEventListener(
-      "timeupdate",
-      sendStatus
-    );
-
-    player.addEventListener(
-      "loadedmetadata",
-      sendStatus
-    );
-
-    player.addEventListener(
-      "play",
-      sendStatus
-    );
-
-    player.addEventListener(
-      "pause",
-      sendStatus
-    );
+    player.addEventListener("timeupdate", sendStatus);
+    player.addEventListener("loadedmetadata", sendStatus);
+    player.addEventListener("play", sendStatus);
+    player.addEventListener("pause", sendStatus);
   </script>
 
 </body>
