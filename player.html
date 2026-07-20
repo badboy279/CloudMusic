@@ -2,59 +2,48 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>Cloud Music Player</title>
 
   <style>
     body {
       margin: 0;
-      background: transparent;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      padding: 8px;
+      background: white;
     }
 
     audio {
-      width: 95%;
+      width: 100%;
     }
   </style>
 </head>
 
 <body>
 
-  <audio id="player" controls preload="metadata">
-    <source
-      src="https://cdn.jsdelivr.net/gh/badboy279/CloudMusic@main/music/qingtian.mp3"
-      type="audio/mpeg">
-    当前设备不支持音频播放。
-  </audio>
+  <audio
+    id="player"
+    controls
+    preload="metadata"
+  ></audio>
 
   <script>
+    const params = new URLSearchParams(
+      window.location.search
+    );
+
+    const musicUrl = params.get("url");
+
     const player = document.getElementById("player");
 
-    function sendStatus() {
-      if (
-        window.AppInventor &&
-        window.AppInventor.setWebViewString
-      ) {
-        const data = {
-          currentTime: player.currentTime || 0,
-          duration: player.duration || 0,
-          paused: player.paused
-        };
-
-        window.AppInventor.setWebViewString(
-          JSON.stringify(data)
-        );
-      }
+    if (musicUrl) {
+      player.src = musicUrl;
+      player.load();
     }
-
-    player.addEventListener("timeupdate", sendStatus);
-    player.addEventListener("loadedmetadata", sendStatus);
-    player.addEventListener("play", sendStatus);
-    player.addEventListener("pause", sendStatus);
   </script>
 
 </body>
