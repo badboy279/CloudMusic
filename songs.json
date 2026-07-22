@@ -16,5 +16,14 @@
     "cover": "cover/chunfengchui.jpg",
     "music": "https://cdn.jsdelivr.net/gh/badboy279/CloudMusic@main/music/chunfengchui.mp3",
     "lyric": "lyrics/chunfengchui.lrc"
+  },
+  {
+    "id": 3,
+    "name": "租购",
+    "artist": "薛之谦",
+    "album": "守村人",
+    "cover": "cover/zugou.jpg",
+    "music": "https://cdn.jsdelivr.net/gh/badboy279/CloudMusic@main/music/zugou.mp3",
+    "lyric": "lyrics/zugou.lrc"
   }
 ]
